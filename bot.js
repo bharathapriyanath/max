@@ -146,7 +146,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
                 var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
                 if (commits.total === 0) {
                    
-                    var webimage = await axios.get(`https://telegra.ph/file/2b96f9eaba69490ae689d.jpg`, { responseType: 'arraybuffer' })
+                    var webimage = await axios.get(`https://i.ibb.co/p07Bvrc/20211223-140551.jpg`, { responseType: 'arraybuffer' })
                     await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: '\n\n\n\n' + Lang.UPDATE +'\n\n\n\n\n\n *⚡powerd by max*' })
                     await conn.sendMessage(conn.user.jid, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
                     await conn.sendMessage(conn.user.jid, "```max WORKING " + config.WORKTYPE + "```" , MessageType.text);
@@ -168,7 +168,7 @@ var unique = conn.user.jid.split('@')[0]
                         }
                     );
                   
-                    var webimage = await axios.get(`https://telegra.ph/file/2b96f9eaba69490ae689d.jpg`, { responseType: 'arraybuffer' })
+                    var webimage = await axios.get(`https://i.ibb.co/p07Bvrc/20211223-140551.jpg`, { responseType: 'arraybuffer' })
                     await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: newzelme + '```'+'\n\n *⚡powerd by max*' })
 
                             await conn.sendMessage(conn.user.jid, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
