@@ -2,9 +2,9 @@
     "__MAXJSON__": true,
     "LANGUAGE": "SINHALA",
     "LANGCODE": "si",
-    "AUTHOR": "LusifarDev",
+    "AUTHOR": "maxDev",
     "STRINGS": {
-        "_lusifar": {
+        "_max": {
             "COMMAND": "විධානය",
             "DESC": "විස්තර",
             "EXAMPLE": "උදාහරණ",
