@@ -1,28 +1,23 @@
-
-/* Copyright (C) 2021 KAVIYAAH - Alexa Team  ,  Lusifar whatsapp bot owner
-Licensed under the  GPL-3.0 License;
-you may not use this file except in compliance with the License.
-kaviyaah - kavishka sandaruwan (v 8.0.0 avalable)
+/* Copyright (C) 2020 Yusuf Usta.
+RECODDED BY AFNANPPLK
+Plk  
 */
 
+const os = require("os");
 const fs = require("fs");
 const path = require("path");
 const events = require("./events");
 const chalk = require('chalk');
 const config = require('./config');
-const simpleGit = require('simple-git');
-const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require('@adiwajshing/baileys');
-const {Message, StringSession, Image, Video} = require('./Lusifar/');
+const {WAConnection, MessageType, Mimetype, Presence} = require('@adiwajshing/baileys');
+const {Message, StringSession, Image, Video} = require('./PinkyMwol/');
 const { DataTypes } = require('sequelize');
-const { getMessage } = require("./plugins/sql/greetings");
-const git = simpleGit();
-const axios = require('axios');
+const { GreetingsDB, getMessage } = require("./plugins/sql/greetings");
 const got = require('got');
+const axios = require('axios');
 
-const Language = require('./language');
-const Lang = Language.getString('updater');
-//sql
-const LUSIFARDB = config.DATABASE.define('LUSIFAR', {
+// Sql
+const WhatsAsenaDB = config.DATABASE.define('WhatsAsena', {
     info: {
       type: DataTypes.STRING,
       allowNull: false
@@ -63,9 +58,9 @@ Array.prototype.remove = function() {
     return this;
 };
 
-async function LUSIFAR () {
+async function whatsAsena () {
     await config.DATABASE.sync();
-    var StrSes_Db = await LUSIFARDB.findAll({
+    var StrSes_Db = await WhatsAsenaDB.findAll({
         where: {
           info: 'StringSession'
         }
@@ -73,7 +68,6 @@ async function LUSIFAR () {
     
     
     const conn = new WAConnection();
-    conn.version = [2,2140,12];
     const Session = new StringSession();
 
     conn.logger.level = config.DEBUG ? 'debug' : 'warn';
@@ -93,14 +87,14 @@ async function LUSIFAR () {
 
         const authInfo = conn.base64EncodedAuthInfo();
         if (StrSes_Db.length < 1) {
-            await LUSIFARDB.create({ info: "StringSession", value: Session.createStringSession(authInfo) });
+            await WhatsAsenaDB.create({ info: "StringSession", value: Session.createStringSession(authInfo) });
         } else {
             await StrSes_Db[0].update({ value: Session.createStringSession(authInfo) });
         }
     })    
 
     conn.on('connecting', async () => {
-        console.log(`${chalk.green.bold('Lusifar')}${chalk.blue.bold('bot')}
+        console.log(`${chalk.green.bold('Whats')}${chalk.blue.bold('Asena')}
 ${chalk.white.bold('Version:')} ${chalk.red.bold(config.VERSION)}
 ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
     });
@@ -138,57 +132,10 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
         });
 
         console.log(
-            chalk.green.bold('Lusifar 𝚠𝚘𝚛𝚔𝚒𝚗𝚐 ' + config.WORKTYPE + ' 𝚗𝚘𝚠 👻'));
-
-    
-            if (config.LANG == 'EN' || config.LANG == 'SI') {
-                await git.fetch();
-                var commits = await git.log([config.BRANCH + '..origin/' + config.BRANCH]);
-                if (commits.total === 0) {
-                   
-                    var webimage = await axios.get(`https://i.ibb.co/p07Bvrc/20211223-140551.jpg`, { responseType: 'arraybuffer' })
-                    await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: '\n\n\n\n' + Lang.UPDATE +'\n\n\n\n\n\n *⚡powerd by bharatha*' })
-                    await conn.sendMessage(conn.user.jid, "Lusifar ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
-                    await conn.sendMessage(conn.user.jid, "```Lusifar WORKING " + config.WORKTYPE + "```" , MessageType.text);
-                
-//======================test to my number
-                 /*   await conn.sendMessage(config.LOGSETTINGS, '\n\n\n\n' + Lang.UPDATE +'\n\n\n\n\n\n *⚡powerd by lusifar*', MessageType.text);
-                    await conn.sendMessage(config.LOGSETTINGS, "Lusifar ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
-                    await conn.sendMessage(config.LOGSETTINGS, "```Lusifar WORKING " + config.WORKTYPE + "```" , MessageType.text);
-                   
-var unique = conn.user.jid.split('@')[0]
-
- await conn.sendMessage(config.LOGSETTINGS, 'මාගේ දෙවියනි නුබ නිසා මන් ලෝකේ සිටින හොදම බොට් හදා ගත්ත .මන් හදවතින්ම ඔයාට ආදරෙයි වස්වාමීනී.මෙන්න මගේ නම්බර් එක🤗 👇 \n  wa.me/' + unique  + "\n මගේ නම " +conn.user.name +  " . \n මම දැන් වැඩ කරන්නෙ " + config.WORKTYPE + "විදිහට \n\n ඔයාට ස්තූතියි🤗❤️‍🩹" , MessageType.text);
-//============================ebd */
-                } else {
-                    var newzelme = Lang.NEW_UPDATE;
-                    commits['all'].map(
-                        (commit) => {
-                            newzelme += '🔸 [' + commit.date.substring(0, 10) + ']: ' + commit.message + ' <' + commit.author_name + '>\n';
-                        }
-                    );
-                  
-                    var webimage = await axios.get(`https://i.ibb.co/p07Bvrc/20211223-140551.jpg`, { responseType: 'arraybuffer' })
-                    await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: newzelme + '```'+'\n\n *⚡powerd by bharatha*' })
-
-                            await conn.sendMessage(conn.user.jid, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
-                            await conn.sendMessage(conn.user.jid, "``` WORKING " + config.WORKTYPE + "```" , MessageType.text);
-//==================================================
-                          /*  await conn.sendMessage(config.LOGSETTINGS, newzelme + '```'+'\n\n *⚡powerd by lusifar*', MessageType.text);
-                            await conn.sendMessage(config.LOGSETTINGS, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
-                            await conn.sendMessage(config.LOGSETTINGS, "``` WORKING " + config.WORKTYPE + "```" , MessageType.text);
-                          */
-
-                    var unique = conn.user.jid.split('@')[0]
-
-                            await conn.sendMessage(config.LOGSETTINGS, 'මාගේ දෙවියනි නුබ නිසා මන් ලෝකේ සිටින හොදම බොට් හදා ගත්ත .මන් හදවතින්ම ඔයාට ආදරෙයි වස්වාමීනී.මෙන්න මගේ නම්බර් එක🤗 👇 \n  wa.me/' + unique  + "\n මගේ නම " +conn.user.name +  " . \n මම දැන් වැඩ කරන්නෙ " + config.WORKTYPE + "විදිහට \n\n ඔයාට ස්තූතියි🤗❤️‍🩹" , MessageType.text);
-                    
-//===================================================
-
-                        } 
-          }
-
-        });
+            chalk.green.bold('𝚙𝚒𝚗𝚔𝚢 𝚠𝚘𝚛𝚔𝚒𝚗𝚐 ' + config.WORKTYPE + ' 𝚗𝚘𝚠 👻'));
+            await conn.sendMessage(conn.user.jid, "ᴘɪɴᴋʏ ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
+            await conn.sendMessage(conn.user.jid, "``` WORKING " + config.WORKTYPE + "```" , MessageType.text);
+    });
     
     conn.on('chat-update', async m => {
         if (!m.hasNewMessage) return;
@@ -202,28 +149,57 @@ var unique = conn.user.jid.split('@')[0]
         
 
         if (msg.messageStubType === 32 || msg.messageStubType === 28) {
+        var plk_say = new Date().toLocaleString('HI', { timeZone: 'Asia/Kolkata' }).split(' ')[1]
+        const get_localized_date = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        var plk_here = new Date().toLocaleDateString(get_localized_date)
+	    var afn_plk_ = '```⏱ Time :' + plk_say + '```\n```📅 Date :' + plk_here + '```'
+
             var gb = await getMessage(msg.key.remoteJid, 'goodbye');
-            var blogo = await axios.get(config.BYE_GIF, { responseType: 'arraybuffer' })
             if (gb !== false) {
-                await conn.sendMessage(msg.key.remoteJid, Buffer.from(blogo.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message});
-            }
+                if (gb.message.includes('{pp}')) {
+                let pp 
+                try { pp = await conn.getProfilePicture(msg.messageStubParameters[0]); } catch { pp = await conn.getProfilePicture(); }
+                    var pinkjson = await conn.groupMetadata(msg.key.remoteJid)
+                await axios.get(pp, {responseType: 'arraybuffer'}).then(async (res) => {
+                await conn.sendMessage(msg.key.remoteJid, res.data, MessageType.image, {caption:  gb.message.replace('{pp}', '').replace('{gphead}', pinkjson.subject).replace('{time}', afn_plk_).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', conn.user.name) }); });                           
+            } else if (gb.message.includes('{gif}')) {
+                //created by afnanplk
+                    var plkpinky = await axios.get(config.GIF_BYE, { responseType: 'arraybuffer' })
+                    var pinkjson = await conn.groupMetadata(msg.key.remoteJid)
+                await conn.sendMessage(msg.key.remoteJid, Buffer.from(plkpinky.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message.replace('{gif}', '').replace('{time}', afn_plk_).replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', conn.user.name) });
+            } else {
+                   await conn.sendMessage(msg.key.remoteJid,gb.message.replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{time}', afn_plk_).replace('{gpdesc}', pinkjson.desc).replace('{owner}', conn.user.name), MessageType.text);
+              } 
+            }//thanks to farhan      
             return;
         } else if (msg.messageStubType === 27 || msg.messageStubType === 31) {
-            var gb = await getMessage(msg.key.remoteJid);
-            var wlogo = await axios.get(config.WELCOME_GIF, { responseType: 'arraybuffer' })
+            // welcome
+            var plk_say = new Date().toLocaleString('HI', { timeZone: 'Asia/Kolkata' }).split(' ')[1]
+           const get_localized_date = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+           var plk_here = new Date().toLocaleDateString(get_localized_date)
+	       var afn_plk_ = '```⏱ Time :' + plk_say + '```\n```📅 Date :' + plk_here + '```'
+             var gb = await getMessage(msg.key.remoteJid);
             if (gb !== false) {
-
-                await conn.sendMessage(msg.key.remoteJid, Buffer.from(wlogo.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message});
+                if (gb.message.includes('{pp}')) {
+                let pp
+                try { pp = await conn.getProfilePicture(msg.messageStubParameters[0]); } catch { pp = await conn.getProfilePicture(); }
+                    var pinkjson = await conn.groupMetadata(msg.key.remoteJid)
+                await axios.get(pp, {responseType: 'arraybuffer'}).then(async (res) => {
+                    //created by afnanplk
+                await conn.sendMessage(msg.key.remoteJid, res.data, MessageType.image, {caption:  gb.message.replace('{pp}', '').replace('{time}', afn_plk_).replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', conn.user.name) }); });                           
+            } else if (gb.message.includes('{gif}')) {
+                var plkpinky = await axios.get(config.WEL_GIF, { responseType: 'arraybuffer' })
+                var pinkjson = await conn.groupMetadata(msg.key.remoteJid)
+                await conn.sendMessage(msg.key.remoteJid, Buffer.from(plkpinky.data), MessageType.video, {mimetype: Mimetype.gif, caption: gb.message.replace('{gif}', '').replace('{time}', afn_plk_).replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{owner}', conn.user.name) });
+            } else {
+                var pinkjson = await conn.groupMetadata(msg.key.remoteJid)
+                   await conn.sendMessage(msg.key.remoteJid,gb.message.replace('{gphead}', pinkjson.subject).replace('{gpmaker}', pinkjson.owner).replace('{gpdesc}', pinkjson.desc).replace('{time}', afn_plk_).replace('{owner}', conn.user.name), MessageType.text);
             }
-            return;
-        }   
+          }         
+            return;                               
+    }         
 
-     if (config.BLOCKCHAT !== false) {     
-        var abc = config.BLOCKCHAT.split(',');                            
-        if(msg.key.remoteJid.includes('-') ? abc.includes(msg.key.remoteJid.split('@')[0]) : abc.includes(msg.participant ? msg.participant.split('@')[0] : msg.key.remoteJid.split('@')[0])) return ;
-    }
- 
-    events.commands.map(
+        events.commands.map(
             async (command) =>  {
                 if (msg.message && msg.message.imageMessage && msg.message.imageMessage.caption) {
                     var text_msg = msg.message.imageMessage.caption;
@@ -291,21 +267,15 @@ var unique = conn.user.jid.split('@')[0]
                             await command.function(whats, match);
                         } catch (error) {
                             if (config.LANG == 'TR' || config.LANG == 'AZ') {
-                                await conn.sendMessage(conn.user.jid, '-- HATA RAPORU [LUSIFAR] --' + 
-                                    '\n*LUSIFAR bir hata gerçekleşti!*'+
+                                await conn.sendMessage(conn.user.jid, '-- HATA RAPORU [WHATSASENA] --' + 
+                                    '\n*WhatsAsena bir hata gerçekleşti!*'+
                                     '\n_Bu hata logunda numaranız veya karşı bir tarafın numarası olabilir. Lütfen buna dikkat edin!_' +
                                     '\n_Yardım için Telegram grubumuza yazabilirsiniz._' +
                                     '\n_Bu mesaj sizin numaranıza (kaydedilen mesajlar) gitmiş olmalıdır._\n\n' +
                                     'Gerçekleşen Hata: ' + error + '\n\n'
                                     , MessageType.text);
                             } else {
-                                await conn.sendMessage(conn.user.jid, '__Lusifar_☠☠_[error] ' +
-                                    '\n\n*👻 ' + error + '*\n'
-                                    , MessageType.text);
-                             
-                             
-                             
-                                     await conn.sendMessage(config.LOGSETTINGS, '__Lusifar_☠☠_[error] ' +
+                                await conn.sendMessage(conn.user.jid, '__PINKYBOT_☠☠_[error] ' +
                                     '\n\n*👻 ' + error + '*\n'
                                     , MessageType.text);
                             }
@@ -331,4 +301,4 @@ var unique = conn.user.jid.split('@')[0]
     }
 }
 
-LUSIFAR();
+whatsAsena();
