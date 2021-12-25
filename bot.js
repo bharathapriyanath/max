@@ -1,5 +1,5 @@
 
-/* Copyright (C) 2021 KAVIYAAH - Alexa Team  ,  max whatsapp bot owner
+/* Copyright (C) 2021 KAVIYAAH - Alexa Team  ,  Lusifar whatsapp bot owner
 Licensed under the  GPL-3.0 License;
 you may not use this file except in compliance with the License.
 kaviyaah - kavishka sandaruwan (v 8.0.0 avalable)
@@ -12,7 +12,7 @@ const chalk = require('chalk');
 const config = require('./config');
 const simpleGit = require('simple-git');
 const {WAConnection, MessageOptions, MessageType, Mimetype, Presence} = require('@adiwajshing/baileys');
-const {Message, StringSession, Image, Video} = require('./max/');
+const {Message, StringSession, Image, Video} = require('./Lusifar/');
 const { DataTypes } = require('sequelize');
 const { getMessage } = require("./plugins/sql/greetings");
 const git = simpleGit();
@@ -22,7 +22,7 @@ const got = require('got');
 const Language = require('./language');
 const Lang = Language.getString('updater');
 //sql
-const maxDB = config.DATABASE.define('max', {
+const LUSIFARDB = config.DATABASE.define('LUSIFAR', {
     info: {
       type: DataTypes.STRING,
       allowNull: false
@@ -63,9 +63,9 @@ Array.prototype.remove = function() {
     return this;
 };
 
-async function max () {
+async function LUSIFAR () {
     await config.DATABASE.sync();
-    var StrSes_Db = await maxDB.findAll({
+    var StrSes_Db = await LUSIFARDB.findAll({
         where: {
           info: 'StringSession'
         }
@@ -93,14 +93,14 @@ async function max () {
 
         const authInfo = conn.base64EncodedAuthInfo();
         if (StrSes_Db.length < 1) {
-            await maxDB.create({ info: "StringSession", value: Session.createStringSession(authInfo) });
+            await LUSIFARDB.create({ info: "StringSession", value: Session.createStringSession(authInfo) });
         } else {
             await StrSes_Db[0].update({ value: Session.createStringSession(authInfo) });
         }
     })    
 
     conn.on('connecting', async () => {
-        console.log(`${chalk.green.bold('max')}${chalk.blue.bold('bot')}
+        console.log(`${chalk.green.bold('Lusifar')}${chalk.blue.bold('bot')}
 ${chalk.white.bold('Version:')} ${chalk.red.bold(config.VERSION)}
 ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
     });
@@ -138,7 +138,7 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
         });
 
         console.log(
-            chalk.green.bold('max 𝚠𝚘𝚛𝚔𝚒𝚗𝚐 ' + config.WORKTYPE + ' 𝚗𝚘𝚠 👻'));
+            chalk.green.bold('Lusifar 𝚠𝚘𝚛𝚔𝚒𝚗𝚐 ' + config.WORKTYPE + ' 𝚗𝚘𝚠 👻'));
 
     
             if (config.LANG == 'EN' || config.LANG == 'SI') {
@@ -147,18 +147,18 @@ ${chalk.blue.italic('ℹ️ Connecting to WhatsApp... Please wait.')}`);
                 if (commits.total === 0) {
                    
                     var webimage = await axios.get(`https://i.ibb.co/p07Bvrc/20211223-140551.jpg`, { responseType: 'arraybuffer' })
-                    await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: '\n\n\n\n' + Lang.UPDATE +'\n\n\n\n\n\n *⚡powerd by max*' })
-                    await conn.sendMessage(conn.user.jid, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
-                    await conn.sendMessage(conn.user.jid, "```max WORKING " + config.WORKTYPE + "```" , MessageType.text);
+                    await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: '\n\n\n\n' + Lang.UPDATE +'\n\n\n\n\n\n *⚡powerd by bharatha*' })
+                    await conn.sendMessage(conn.user.jid, "Lusifar ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
+                    await conn.sendMessage(conn.user.jid, "```Lusifar WORKING " + config.WORKTYPE + "```" , MessageType.text);
                 
 //======================test to my number
-                 /*   await conn.sendMessage(config.LOGSETTINGS, '\n\n\n\n' + Lang.UPDATE +'\n\n\n\n\n\n *⚡powerd by max*', MessageType.text);
-                    await conn.sendMessage(config.LOGSETTINGS, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
-                    await conn.sendMessage(config.LOGSETTINGS, "```max WORKING " + config.WORKTYPE + "```" , MessageType.text);
+                 /*   await conn.sendMessage(config.LOGSETTINGS, '\n\n\n\n' + Lang.UPDATE +'\n\n\n\n\n\n *⚡powerd by lusifar*', MessageType.text);
+                    await conn.sendMessage(config.LOGSETTINGS, "Lusifar ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
+                    await conn.sendMessage(config.LOGSETTINGS, "```Lusifar WORKING " + config.WORKTYPE + "```" , MessageType.text);
                    
 var unique = conn.user.jid.split('@')[0]
 
- await conn.sendMessage(config.LOGSETTINGS, 'මම තමයි ලෝකයේ සිටින හොදම බොට් 😒😂owner is a bharatha 😒.මෙන්න මගේ නම්බර් එක🤗 👇 \n  wa.me/' + unique  + "\n මගේ නම " +conn.user.name +  " . \n මම දැන් වැඩ කරන්නෙ " + config.WORKTYPE + "විදිහට \n\n ඔයාට ස්තූතියි🤗❤️‍🩹" , MessageType.text);
+ await conn.sendMessage(config.LOGSETTINGS, 'මාගේ දෙවියනි නුබ නිසා මන් ලෝකේ සිටින හොදම බොට් හදා ගත්ත .මන් හදවතින්ම ඔයාට ආදරෙයි වස්වාමීනී.මෙන්න මගේ නම්බර් එක🤗 👇 \n  wa.me/' + unique  + "\n මගේ නම " +conn.user.name +  " . \n මම දැන් වැඩ කරන්නෙ " + config.WORKTYPE + "විදිහට \n\n ඔයාට ස්තූතියි🤗❤️‍🩹" , MessageType.text);
 //============================ebd */
                 } else {
                     var newzelme = Lang.NEW_UPDATE;
@@ -169,12 +169,12 @@ var unique = conn.user.jid.split('@')[0]
                     );
                   
                     var webimage = await axios.get(`https://i.ibb.co/p07Bvrc/20211223-140551.jpg`, { responseType: 'arraybuffer' })
-                    await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: newzelme + '```'+'\n\n *⚡powerd by max*' })
+                    await conn.sendMessage(conn.user.jid,Buffer.from(webimage.data), MessageType.image, {mimetype: Mimetype.jpg  , caption: newzelme + '```'+'\n\n *⚡powerd by bharatha*' })
 
                             await conn.sendMessage(conn.user.jid, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
                             await conn.sendMessage(conn.user.jid, "``` WORKING " + config.WORKTYPE + "```" , MessageType.text);
 //==================================================
-                          /*  await conn.sendMessage(config.LOGSETTINGS, newzelme + '```'+'\n\n *⚡powerd by max*', MessageType.text);
+                          /*  await conn.sendMessage(config.LOGSETTINGS, newzelme + '```'+'\n\n *⚡powerd by lusifar*', MessageType.text);
                             await conn.sendMessage(config.LOGSETTINGS, "max ɪꜱ ᴀʟʟ ꜱᴇᴛ", MessageType.text);
                             await conn.sendMessage(config.LOGSETTINGS, "``` WORKING " + config.WORKTYPE + "```" , MessageType.text);
                           */
@@ -291,21 +291,21 @@ var unique = conn.user.jid.split('@')[0]
                             await command.function(whats, match);
                         } catch (error) {
                             if (config.LANG == 'TR' || config.LANG == 'AZ') {
-                                await conn.sendMessage(conn.user.jid, '-- HATA RAPORU [max] --' + 
-                                    '\n*max bir hata gerçekleşti!*'+
+                                await conn.sendMessage(conn.user.jid, '-- HATA RAPORU [LUSIFAR] --' + 
+                                    '\n*LUSIFAR bir hata gerçekleşti!*'+
                                     '\n_Bu hata logunda numaranız veya karşı bir tarafın numarası olabilir. Lütfen buna dikkat edin!_' +
                                     '\n_Yardım için Telegram grubumuza yazabilirsiniz._' +
                                     '\n_Bu mesaj sizin numaranıza (kaydedilen mesajlar) gitmiş olmalıdır._\n\n' +
                                     'Gerçekleşen Hata: ' + error + '\n\n'
                                     , MessageType.text);
                             } else {
-                                await conn.sendMessage(conn.user.jid, '__max_☠☠_[error] ' +
+                                await conn.sendMessage(conn.user.jid, '__Lusifar_☠☠_[error] ' +
                                     '\n\n*👻 ' + error + '*\n'
                                     , MessageType.text);
                              
                              
                              
-                                     await conn.sendMessage(config.LOGSETTINGS, '__max_☠☠_[error] ' +
+                                     await conn.sendMessage(config.LOGSETTINGS, '__Lusifar_☠☠_[error] ' +
                                     '\n\n*👻 ' + error + '*\n'
                                     , MessageType.text);
                             }
@@ -331,4 +331,4 @@ var unique = conn.user.jid.split('@')[0]
     }
 }
 
-max();
+LUSIFAR();
