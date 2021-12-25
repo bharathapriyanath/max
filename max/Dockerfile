@@ -1,12 +1,9 @@
 FROM fusuf/whatsasena:latest
 
-RUN git clone https://github.com/bharathapriyanath/max /root/LUSIFARWABOT
-WORKDIR /root/LUSIFARWABOT/
-RUN git clone https://github.com/kavishkaya/uploads
+RUN git clone https://github.com/bharathapriyanath/max /root/WhatsAsenaDuplicated
+WORKDIR /root/WhatsAsenaDuplicated/
 ENV TZ=Europe/Istanbul
 RUN npm install supervisor -g
 RUN yarn install --no-audit
-
-
 
 CMD ["node", "bot.js"]
